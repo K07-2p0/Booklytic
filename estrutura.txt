@@ -1,11 +1,13 @@
 projeto-agendamento/
-├── backend/
-│   ├── main.py              # Ponto de entrada da API
-│   ├── database.py          # Configuração do SQLite e SQLAlchemy
-│   ├── models.py            # Definição da tabela no Banco de Dados
-│   ├── schemas.py           # Validação de dados (Pydantic) - Camada de Segurança
-│   ├── .env                 # Variáveis sensíveis (senhas, chaves)
-│   └── requirements.txt     # Dependências (fastapi, uvicorn, sqlalchemy)
+backend/
+├── main.py              # O ficheiro principal que liga o servidor
+├── database.py          # A ligação à nossa base de dados (SQLite por agora)
+├── models.py            # As "Tabelas" reais da base de dados (SQLAlchemy)
+├── schemas.py           # Os "Filtros de Segurança" dos dados (Pydantic)
+└── rotas/               # Nova pasta para organizar melhor!
+    ├── marcacoes.py     # Código só para criar/listar marcações
+    ├── utilizadores.py  # Código só para gerir técnicos
+    └── equipamentos.py  # Código para a biblioteca técnica
 ├── frontend/
 │   ├── index.html           # Interface do utilizador
 │   ├── style.css            # Design moderno
