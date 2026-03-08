@@ -1,0 +1,13 @@
+projeto-agendamento/
+├── backend/
+│   ├── main.py              # Ponto de entrada da API
+│   ├── database.py          # Configuração do SQLite e SQLAlchemy
+│   ├── models.py            # Definição da tabela no Banco de Dados
+│   ├── schemas.py           # Validação de dados (Pydantic) - Camada de Segurança
+│   ├── .env                 # Variáveis sensíveis (senhas, chaves)
+│   └── requirements.txt     # Dependências (fastapi, uvicorn, sqlalchemy)
+├── frontend/
+│   ├── index.html           # Interface do utilizador
+│   ├── style.css            # Design moderno
+│   └── app.js               # Lógica para enviar dados para o Python
+└── .gitignore               # Para não enviar o .env e a base de dados para o GitHub
