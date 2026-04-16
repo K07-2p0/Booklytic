@@ -11,10 +11,10 @@ import { toast } from "react-toastify";
 
 
 
-const Login = () => {
+const Register = () => {
   const [ showPassword, setShowPassword ] = useState(false);
   const navigate = useNavigate();
-  const [ token, setToken ] = useState(JSON.parse(localStorage.getItem("auth")) || "");
+  const [ token ] = useState(() => localStorage.getItem("auth") || "");
 
 
 
@@ -35,11 +35,13 @@ const Login = () => {
           password
         };
         try{
-        const response = await axios.post("http://localhost:3000/api/v1/register", formData);
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/register`, formData, {
+          withCredentials: true
+        });
          toast.success("Registration successfull");
          navigate("/login");
        }catch(err){
-         toast.error(err.message);
+         toast.error(err.response?.data?.msg || err.message);
        }
       }else{
         toast.error("Passwords don't match");
@@ -106,4 +108,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

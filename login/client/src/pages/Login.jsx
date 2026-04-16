@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [ token, setToken ] = useState(JSON.parse(localStorage.getItem("auth")) || "");
+  const [ token ] = useState(() => localStorage.getItem("auth") || "");
   const navigate = useNavigate();
 
 
@@ -28,15 +28,17 @@ const Login = () => {
       };
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/v1/login",
-          formData
+          `${import.meta.env.VITE_API_URL}/login`,
+          formData,
+          { withCredentials: true }
         );
-        localStorage.setItem('auth', JSON.stringify(response.data.token));
+        // Store token in localStorage for UI state only, actual auth uses httpOnly cookie
+        localStorage.setItem('auth', response.data.token);
         toast.success("Login successfull");
         navigate("/dashboard");
       } catch (err) {
         console.log(err);
-        toast.error(err.message);
+        toast.error(err.response?.data?.msg || err.message);
       }
     } else {
       toast.error("Please fill all inputs");
